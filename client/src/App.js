@@ -15,7 +15,6 @@ function App() {
     }
   })
 
-
   function getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -47,7 +46,7 @@ function App() {
   return (
     <div className='App'>
       <p>{loggedIn.toString()}</p>
-      { !loggedIn && <a href='http://localhost:5000'> Login to Spotify </a>}
+      { !loggedIn && <a href='http://localhost:5000/login'> Login to Spotify </a>}
       { loggedIn && <button onClick={getNowPlaying}>Check Now Playing</button>}
       <div>
         Now Playing: {nowPlaying.name}
@@ -60,43 +59,3 @@ function App() {
 }
 
 export default App;
-
-
-// import React, {useState,useEffect} from "react";
-// var SpotifyWebApi = require('spotify-web-api-node');
-//
-// function App() {
-//   const [params, setParams] = useState('');
-//   var spotifyApi = new SpotifyWebApi();
-//   //this can't be right
-//   if(window.location.search.length > 0 && params.length === 0){
-//     getHashParams();
-//     spotifyApi.setAccessToken(params);
-//   }
-//   console.log(params)
-//
-//   function getHashParams() {
-//     var hashParams = (window.location.search)
-//     hashParams = hashParams.substring(6, hashParams.length);
-//     setParams(hashParams);
-//   }
-//
-//   function getNowPlaying(){
-//     spotifyApi.getMyCurrentPlaybackState({
-//     })
-//     .then(function(data) {
-//       // Output items
-//       console.log("Now Playing: ",data.body);
-//     }, function(err) {
-//       console.log('Something went wrong!', err);
-//     });
-// }
-//
-//   return (
-//     <div className='App'>
-//       <a href='http://localhost:5000/login'> Login to Spotify </a>
-//     </div>
-//   )
-// }
-//
-// export default App;
