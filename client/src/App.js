@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 const SpotifyWebApi = require('spotify-web-api-node');
+const queryString = require('query-string');
+const axios = require('axios');
 
 function App() {
   const spotifyApi = new SpotifyWebApi();
@@ -7,6 +9,7 @@ function App() {
   const [token, setToken] = useState(getHashParams());
   const [loggedIn, setLoggedIn] = useState(false);
   const [nowPlaying, setNowPlaying] = useState({name: 'Not Checked', albumArt: ''});
+  const [allArtists, setArtists] = useState([]);
 
   useEffect(()=>{
     if(Object.keys(token).length > 0){
@@ -43,16 +46,33 @@ function App() {
     });
   }
 
+  function getTopArtists(){
+    axios.get('https://api.spotify.com/v1/me/top/artists',{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( res => {
+      console.log(res.data);
+      let artistArray = [];
+      let artists = res.data.items;
+      artists.forEach( artist => {
+        artistArray.push(artist.name);
+      });
+      setArtists(artistArray);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className='App'>
       <p>{loggedIn.toString()}</p>
       { !loggedIn && <a href='http://localhost:5000/login'> Login to Spotify </a>}
-      { loggedIn && <button onClick={getNowPlaying}>Check Now Playing</button>}
+      { loggedIn && <button onClick={getTopArtists}>Check Now Playing</button>}
       <div>
         Now Playing: {nowPlaying.name}
       </div>
       <div>
         <img src={nowPlaying.albumArt} style={{ height: 150 }}/>
+      </div>
+      <div>
+        <p> {allArtists} </p>
       </div>
     </div>
   );
