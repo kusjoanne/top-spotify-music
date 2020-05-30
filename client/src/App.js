@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import Artist from './Artist';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import CardDeck from 'react-bootstrap/CardDeck';
 const SpotifyWebApi = require('spotify-web-api-node');
-const queryString = require('query-string');
 const axios = require('axios');
+
 
 function App() {
   const spotifyApi = new SpotifyWebApi();
@@ -10,6 +14,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [nowPlaying, setNowPlaying] = useState({name: 'Not Checked', albumArt: ''});
   const [allArtists, setArtists] = useState([]);
+  const [allTracks, setTracks] = useState([]);
 
   useEffect(()=>{
     if(Object.keys(token).length > 0){
@@ -28,31 +33,12 @@ function App() {
     return (hashParams);
   }
 
-  function getNowPlaying(){
-    spotifyApi.getMyCurrentPlaybackState({
-    })
-    .then(function(data) {
-      if(data.statusCode === 200){
-        if(data.body.item){
-          setNowPlaying({name: data.body.item.artists[0].name, albumArt: data.body.item.album.images[0].url});
-        } else {
-          setNowPlaying({name: "A PODCAST"});
-        }
-      } else {
-        setNowPlaying({name: "NOTHING"});
-      }
-    }, function(err) {
-      console.log('Something went wrong!', err);
-    });
-  }
-
   function getTopArtists(){
     axios.get('https://api.spotify.com/v1/me/top/artists',{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( res => {
-      console.log(res.data);
       let artistArray = [];
       let artists = res.data.items;
       artists.forEach( artist => {
-        artistArray.push(artist.name);
+        artistArray.push({artistName: artist.name, albumArt:artist.images[2].url});
       });
       setArtists(artistArray);
     }).catch(err => {
@@ -60,22 +46,34 @@ function App() {
     })
   }
 
-  return (
-    <div className='App'>
-      <p>{loggedIn.toString()}</p>
-      { !loggedIn && <a href='http://localhost:5000/login'> Login to Spotify </a>}
-      { loggedIn && <button onClick={getTopArtists}>Check Now Playing</button>}
-      <div>
-        Now Playing: {nowPlaying.name}
-      </div>
-      <div>
-        <img src={nowPlaying.albumArt} style={{ height: 150 }}/>
-      </div>
-      <div>
-        <p> {allArtists} </p>
-      </div>
-    </div>
-  );
+  function getTopTracks(){
+    axios.get('https://api.spotify.com/v1/me/top/tracks',{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( res => {
+      let tracksArray = [];
+      let tracks = res.data.items;
+      console.log(tracks);
+      tracks.forEach( track => {
+      tracksArray.push({trackName: track.name, artist: track.artists[0].name, albumArt: track.album.images[0].url});
+      });
+      setTracks(tracksArray);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  return <div className='App'>
+    { !loggedIn && <a href='http://localhost:5000/login'> Login to Spotify </a>}
+    { loggedIn && <Button variant="outline-primary" onClick={getTopArtists}>Check Top Artists</Button>}
+    { loggedIn && <Button variant="outline-primary" onClick={getTopTracks}>Check Top Tracks</Button>}
+    <Container>
+      <CardDeck>
+        {allArtists.map( (artist, index) => {
+          return <Artist key={index} artistName={artist.artistName} albumArt={artist.albumArt}/>;
+        })}
+      </CardDeck>
+    </Container>
+
+  </div>
+
 }
 
 export default App;
