@@ -45,19 +45,34 @@ function App() {
     axios.get(`https://api.spotify.com/v1/me/top/${queryType}?limit=${resultCount}&time_range=${timeRange}`,{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( res => {
       let resultsArray = [];
       let apiResults = res.data.items;
+      console.log(apiResults);
       if(queryType==='artists'){
         apiResults.forEach( result => {
-          resultsArray.push({artistName: result.name, albumArt:result.images[1].url});
+          getTopArtistTrack(result, resultsArray);
+          resultsArray.push({artistName: result.name, albumArt:result.images[1].url, previewUrl:apiResults.tracks[0].preview_url});
         });
       } else if (queryType === 'tracks'){
         apiResults.forEach( result => {
-          resultsArray.push({trackName: result.name, albumArt:result.album.images[1].url, artistName:result.artists[0].name});
+          resultsArray.push({trackName: result.name, albumArt:result.album.images[1].url, artistName:result.artists[0].name, previewUrl:result.preview_url});
         });
       }
+      console.log(resultsArray);
       setResults(resultsArray);
     }).catch(err => {
       console.log(err);
     })
+  }
+
+  function getTopArtistTrack(result, resultsArray){
+    // axios.get(`https://api.spotify.com/v1/artists/${result.id}/top-tracks?country=US`,{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( response => {
+    //   let apiResults = response.data;
+    //   resultsArray.push({artistName: result.name, albumArt:result.images[1].url, previewUrl:apiResults.tracks[0].preview_url});
+    //   console.log('TOP');
+    //   console.log(resultsArray);
+    // }).catch(err => {
+    //   console.log(err);
+    // })
+
   }
 
   return <div className='App'>
@@ -71,6 +86,7 @@ function App() {
         })}
       </CardDeck>
     </Container>
+    {/* <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> */}
   </div>
 
 }

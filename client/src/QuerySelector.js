@@ -13,7 +13,7 @@ function QuerySelector(props){
   const [queryType, setQueryType] = useState(query_type_options[0]);
 
   return <div className='query'>
-    <h3 className="queryStatement"> SHOW MY TOP </h3>
+    <h4 className="queryStatement"> SHOW MY TOP </h4>
     <DropdownButton className='querySelector' size="lg" onSelect={tr => setResultCount(tr)} title={resultCount}>
       {result_count_options.map(option =>{
         return <Dropdown.Item eventKey={option}>{option}</Dropdown.Item>
@@ -24,13 +24,13 @@ function QuerySelector(props){
         return <Dropdown.Item eventKey={option}>{option}</Dropdown.Item>
       })}
     </DropdownButton>
-    <h3 className="queryStatement"> WITHIN THE LAST FEW</h3>
+    <h4 className="queryStatement"> WITHIN THE LAST FEW</h4>
     <DropdownButton className='querySelector' size="lg" onSelect={tr => setTimeRange(tr)} title={timeRange}>
       {time_range_options.map(option =>{
         return <Dropdown.Item eventKey={option}>{option}</Dropdown.Item>
       })}
     </DropdownButton>
-    <Button variant="light" size="lg" onClick={props.getReults.bind(this,timeRange,resultCount,queryType)}>Submit</Button>
+    <Button variant="light" size="lg" onClick={props.getReults.bind(this,timeRange,resultCount,queryType)}>SUBMIT</Button>
   </div>
 }
 
