@@ -15,19 +15,19 @@ function QuerySelector(props){
   return <div className='query'>
     <h4 className="queryStatement"> SHOW MY TOP </h4>
     <DropdownButton className='querySelector' size="lg" onSelect={tr => setResultCount(tr)} title={resultCount}>
-      {result_count_options.map(option =>{
-        return <Dropdown.Item eventKey={option}>{option}</Dropdown.Item>
+      {result_count_options.map((option, index) =>{
+        return <Dropdown.Item key={index} eventKey={option}>{option}</Dropdown.Item>
       })}
     </DropdownButton>
     <DropdownButton className='querySelector' size="lg" onSelect={tr => setQueryType(tr)} title={queryType}>
-      {query_type_options.map(option =>{
-        return <Dropdown.Item eventKey={option}>{option}</Dropdown.Item>
+      {query_type_options.map((option, index) =>{
+        return <Dropdown.Item key={index} eventKey={option}>{option}</Dropdown.Item>
       })}
     </DropdownButton>
     <h4 className="queryStatement"> WITHIN THE LAST FEW</h4>
     <DropdownButton className='querySelector' size="lg" onSelect={tr => setTimeRange(tr)} title={timeRange}>
-      {time_range_options.map(option =>{
-        return <Dropdown.Item eventKey={option}>{option}</Dropdown.Item>
+      {time_range_options.map((option, index) =>{
+        return <Dropdown.Item key={index} eventKey={option}>{option}</Dropdown.Item>
       })}
     </DropdownButton>
     <Button variant="light" size="lg" onClick={props.getReults.bind(this,timeRange,resultCount,queryType)}>SUBMIT</Button>

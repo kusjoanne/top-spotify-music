@@ -32,6 +32,7 @@ function Artist(props){
         </Card.Body>
       </Card>
     </div>
+    {console.log(props)}
   </StyleRoot>
 }
 
