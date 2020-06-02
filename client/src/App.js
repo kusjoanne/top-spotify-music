@@ -14,6 +14,8 @@ function App() {
   const [token, setToken] = useState(getHashParams());
   const [loggedIn, setLoggedIn] = useState(false);
   const [results, setResults] = useState([]);
+  const [playingSong, setPlayingSong] = useState(null);
+  let audio = null;
 
   useEffect(()=>{
     if(Object.keys(token).length > 0){
@@ -32,6 +34,14 @@ function App() {
     return (hashParams);
   }
 
+  function playAudio(audiolink){
+    if(audio){
+      audio.pause();
+    }
+    audio = new Audio(audiolink);
+    audio.play();
+  }
+
   function getReults(timeRange,resultCount,queryType){
     queryType = queryType.toLowerCase();
     if(timeRange==='WEEKS'){
@@ -45,34 +55,32 @@ function App() {
     axios.get(`https://api.spotify.com/v1/me/top/${queryType}?limit=${resultCount}&time_range=${timeRange}`,{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( res => {
       let resultsArray = [];
       let apiResults = res.data.items;
-      console.log(apiResults);
       if(queryType==='artists'){
         apiResults.forEach( result => {
-          getTopArtistTrack(result, resultsArray);
-          // resultsArray.push({artistName: result.name, albumArt:result.images[1].url, previewUrl:apiResults.tracks[0].preview_url});
+          // let preview_url =  getTopArtistTrack(result.id);
+          // console.log(preview_url);
+          resultsArray.push({artistName: result.name, albumArt:result.images[1].url});
         });
-        setResults(resultsArray);
       } else if (queryType === 'tracks'){
         apiResults.forEach( result => {
           resultsArray.push({trackName: result.name, albumArt:result.album.images[1].url, artistName:result.artists[0].name, previewUrl:result.preview_url});
         });
-        setResults(resultsArray);
       }
-      console.log(resultsArray);
+      setResults(resultsArray);
+      audio.pause();
     }).catch(err => {
       console.log(err);
     })
   }
 
-  function getTopArtistTrack(result, resultsArray){
-    axios.get(`https://api.spotify.com/v1/artists/${result.id}/top-tracks?country=US`,{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( response => {
-      let apiResults = response.data;
-      resultsArray.push({artistName: result.name, albumArt:result.images[1].url, previewUrl:apiResults.tracks[0].preview_url});
-    }).catch(err => {
-      console.log(err);
-    })
-
-  }
+  // async function getTopArtistTrack(artist_id){
+  //   await axios.get(`https://api.spotify.com/v1/artists/${artist_id}/top-tracks?country=US`,{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( response => {
+  //     let apiResults = response.data;
+  //     console.log(apiResults.tracks[0].preview_url);
+  //   }).catch(err => {
+  //     console.log(err);
+  //   })
+  // }
 
   return <div className='App'>
     <h1 style={{fontSize: '4.5rem'}}>MY TOP SPOTFIY MUSIC</h1>
@@ -81,7 +89,7 @@ function App() {
     <Container className='results'>
       <CardDeck>
         {results.map( (result, index) => {
-          return <Artist key={index} result={result}/>;
+          return <Artist key={index} result={result} playAudio={playAudio}/>;
         })}
       </CardDeck>
     </Container>

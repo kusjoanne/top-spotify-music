@@ -14,15 +14,38 @@ h1{
   text-align: center;
 }
 
-.albumArt{
-  height: 190px;
-  object-fit: cover;
+/* ////////////////// Artist Card ////////////////// */
+div.container{
+  padding: 0;
 }
 
-/* img.card-img-top:hover{
-  background: rgba(0, 0, 0, 0.5);
+.albumArt{
   opacity: 1;
-} */
+  height: 190px;
+  object-fit: cover;
+  backface-visibility: hidden;
+}
+
+.middle{
+  transition: .5s ease;
+  opacity: 0;
+}
+
+div.cardImg:hover .albumArt{
+  transition: .5s ease;
+  opacity: 0.3;
+}
+
+div.cardImg:hover .middle {
+  opacity: 1;
+}
+
+.playbtn{
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+}
 
 div.card-body{
   padding: 5px;
@@ -38,6 +61,7 @@ div.card-title{
   padding-bottom: 5px;
 }
 
+/* ////////////////// Query Selector ////////////////// */
 .querySelector{
   text-shadow: 0px 2px 2px #c8c8c8;
   display: inline;
@@ -61,6 +85,7 @@ option{
 
 .query{
   text-align: center;
+  padding-bottom: 60px;
 }
 
 .dropdown-toggle{
