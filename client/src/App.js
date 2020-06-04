@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Artist from './Artist';
 import QuerySelector from './QuerySelector';
+import Footer from './Footer';
 import Container from 'react-bootstrap/Container';
 import CardDeck from 'react-bootstrap/CardDeck';
 import Button from 'react-bootstrap/Button';
@@ -34,7 +35,6 @@ function App() {
   }
 
   function playAudio(audiolink){
-    console.log(audiolink);
     if(audio){
       audio.pause();
     }
@@ -62,6 +62,7 @@ function App() {
         apiResults.forEach( result => {
           resultsArray.push({trackName: result.name, albumArt:result.album.images[1].url, artistName:result.artists[0].name, previewUrl:result.preview_url});
         });
+        setResults([]);
         setResults(resultsArray);
       }
       if(audio){
@@ -81,6 +82,7 @@ function App() {
           for(let i =0; i< urls.length; i++){
             resultsArray[i].previewUrl = urls[i];
           }
+          setResults([]);
           setResults(resultsArray);
         });
       }
@@ -101,6 +103,7 @@ function App() {
         })}
       </CardDeck>
     </Container>
+    <Footer/>
   </div>
 
 }

@@ -26,5 +26,7 @@
     "cors": "^2.8.4",
     "querystring": "~0.2.0",
     "request": "~2.83.0"
+  },"engines": {
+    "node": "12.16.1"
   }
 }

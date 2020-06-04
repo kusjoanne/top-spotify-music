@@ -14,7 +14,6 @@ function Artist(props){
   }
 
   return <StyleRoot>
-    {console.log(props.result)}
     <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
       <Card style={{ width: '12rem' }}>
         <div className="cardImg" onClick={props.playAudio.bind(this,props.result.previewUrl)}>
