@@ -14,11 +14,12 @@ function Artist(props){
   }
 
   return <StyleRoot>
+    {console.log(props.result)}
     <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
       <Card style={{ width: '12rem' }}>
-        <div class="cardImg" onClick={props.playAudio.bind(this,props.result.previewUrl)}>
+        <div className="cardImg" onClick={props.playAudio.bind(this,props.result.previewUrl)}>
           <Card.Img className='albumArt' variant="top" src={props.result.albumArt} />
-          <div class="middle">
+          <div className="middle">
             <img className="playbtn" alt="playButton" src="https://image.flaticon.com/icons/png/512/907/907754.png"></img>
           </div>
         </div>

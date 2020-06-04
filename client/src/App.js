@@ -14,7 +14,6 @@ function App() {
   const [token, setToken] = useState(getHashParams());
   const [loggedIn, setLoggedIn] = useState(false);
   const [results, setResults] = useState([]);
-  const [playingSong, setPlayingSong] = useState(null);
   let audio = null;
 
   useEffect(()=>{
@@ -35,6 +34,7 @@ function App() {
   }
 
   function playAudio(audiolink){
+    console.log(audiolink);
     if(audio){
       audio.pause();
     }
@@ -51,36 +51,42 @@ function App() {
     } else if(timeRange==='YEARS'){
       timeRange = 'long_term';
     }
-
     axios.get(`https://api.spotify.com/v1/me/top/${queryType}?limit=${resultCount}&time_range=${timeRange}`,{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( res => {
       let resultsArray = [];
       let apiResults = res.data.items;
       if(queryType==='artists'){
         apiResults.forEach( result => {
-          // let preview_url =  getTopArtistTrack(result.id);
-          // console.log(preview_url);
-          resultsArray.push({artistName: result.name, albumArt:result.images[1].url});
+          resultsArray.push({artistName: result.name, albumArt:result.images[1].url, previewUrl:result.id});
         });
       } else if (queryType === 'tracks'){
         apiResults.forEach( result => {
           resultsArray.push({trackName: result.name, albumArt:result.album.images[1].url, artistName:result.artists[0].name, previewUrl:result.preview_url});
         });
+        setResults(resultsArray);
       }
-      setResults(resultsArray);
-      audio.pause();
+      if(audio){
+        audio.pause();
+      }
+      return resultsArray;
+    }).then( (resultsArray) =>{
+      if (queryType === 'artists'){
+        let promises = resultsArray.map( result => {
+          return axios.get(`https://api.spotify.com/v1/artists/${result.previewUrl}/top-tracks?country=US`,{headers:{'Authorization': 'Bearer ' + token.access_token}})
+          // .then( response => {
+          //   return response.data;
+          // });
+        });
+        console.log(promises);
+        // axios.all([getUserAccount(), getUserPermissions()])
+        // .then(axios.spread(function (acct, perms) {
+        //   // Both requests are now complete
+        // }));
+      }
     }).catch(err => {
       console.log(err);
     })
-  }
 
-  // async function getTopArtistTrack(artist_id){
-  //   await axios.get(`https://api.spotify.com/v1/artists/${artist_id}/top-tracks?country=US`,{headers:{'Authorization': 'Bearer ' + token.access_token}}).then( response => {
-  //     let apiResults = response.data;
-  //     console.log(apiResults.tracks[0].preview_url);
-  //   }).catch(err => {
-  //     console.log(err);
-  //   })
-  // }
+  }
 
   return <div className='App'>
     <h1 style={{fontSize: '4.5rem'}}>MY TOP SPOTFIY MUSIC</h1>
@@ -93,7 +99,6 @@ function App() {
         })}
       </CardDeck>
     </Container>
-    {/* <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> */}
   </div>
 
 }
