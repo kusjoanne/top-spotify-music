@@ -72,15 +72,17 @@ function App() {
       if (queryType === 'artists'){
         let promises = resultsArray.map( result => {
           return axios.get(`https://api.spotify.com/v1/artists/${result.previewUrl}/top-tracks?country=US`,{headers:{'Authorization': 'Bearer ' + token.access_token}})
-          // .then( response => {
-          //   return response.data;
-          // });
+          .then( response => {
+            return response.data.tracks[0].preview_url;
+          });
         });
-        console.log(promises);
-        // axios.all([getUserAccount(), getUserPermissions()])
-        // .then(axios.spread(function (acct, perms) {
-        //   // Both requests are now complete
-        // }));
+        axios.all(promises)
+        .then( urls=>{
+          for(let i =0; i< urls.length; i++){
+            resultsArray[i].previewUrl = urls[i];
+          }
+          setResults(resultsArray);
+        });
       }
     }).catch(err => {
       console.log(err);
