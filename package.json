@@ -1,7 +1,6 @@
 {
   "name": "top-spotify-music",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,13 +21,22 @@
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4",
     "cookie-parser": "1.3.2",
     "cors": "^2.8.4",
+    "nodemon": "^2.0.4",
     "querystring": "~0.2.0",
-    "request": "~2.83.0"
+    "request": "^2.83.0"
   },
   "engines": {
     "node": "12.16.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kusjoanne/top-spotify-music.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kusjoanne/top-spotify-music/issues"
+  },
+  "homepage": "https://github.com/kusjoanne/top-spotify-music#readme",
+  "description": ""
 }
