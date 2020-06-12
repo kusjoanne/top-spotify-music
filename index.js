@@ -38,6 +38,9 @@ app.use(express.static(__dirname + '/public'))
    .use(cookieParser())
    .use(bodyParser.json());
 
+
+//likely that this is fucking up the environment
+//always re-sending the same file
 if (process.env.NODE_ENV === 'production') {
  app.use(express.static('client/build'));
 
@@ -49,7 +52,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/login', function(req, res) {
-  console.log("AAAAAAAAAAAAAAAAAAAA LOGIN WAS CALLED");
+  console.log("LOGIN WAS CALLED");
+  console.log(client_id);
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
