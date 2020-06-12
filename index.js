@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
  })
 
 }
-console.log(redirect_uri);
+
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
@@ -65,7 +65,7 @@ app.get('/login', function(req, res) {
     }));
 });
 
-app.get('/callback', function(req, res) {
+app.get('https://my-top-spotify-music.herokuapp.com/callback', function(req, res) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter
