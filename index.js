@@ -74,13 +74,18 @@ app.get('/callback', function(req, res) {
   var state = req.query.state || null;
 
   var storedState = req.cookies ? req.cookies[stateKey] : null;
-
+  console.log("state");
+  console.log(state);
+  console.log("storedState");
+  console.log(storedState);
   if (state === null || state !== storedState) {
+  console.log("state mismatch");
     res.redirect('/#' +
       querystring.stringify({
         error: 'state_mismatch'
       }));
   } else {
+    console.log("state match");
     res.clearCookie(stateKey);
     var authOptions = {
       url: 'https://accounts.spotify.com/api/token',
