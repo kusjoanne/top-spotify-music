@@ -44,16 +44,16 @@ app.use(express.static(__dirname + '/public'))
 if (process.env.NODE_ENV === 'production') {
  app.use(express.static('client/build'));
 
- const path = require('path');
- app.get('/', (req,res) => {
-     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
- })
+ // const path = require('path');
+ // app.get('/', (req,res) => {
+ //     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+ // })
 
 }
 
 app.get('/login', function(req, res) {
   console.log("LOGIN WAS CALLED");
-  console.log(process.env.CLIENT_ID);
+  console.log(client_id)
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
@@ -62,7 +62,7 @@ app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
-      client_id: process.env.CLIENT_ID,
+      client_id: client_id,
       scope: scope,
       redirect_uri: redirect_uri,
       state: state
