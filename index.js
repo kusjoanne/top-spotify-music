@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/login', function(req, res) {
   console.log("LOGIN WAS CALLED");
-  console.log(client_id);
+  console.log(process.env.CLIENT_ID);
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
@@ -62,7 +62,7 @@ app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
-      client_id: client_id,
+      client_id: process.env.CLIENT_ID,
       scope: scope,
       redirect_uri: redirect_uri,
       state: state
