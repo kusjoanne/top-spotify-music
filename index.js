@@ -69,17 +69,20 @@ app.get('/callback', function(req, res) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter
-
   var code = req.query.code || null;
   var state = req.query.state || null;
+  console.log(code);
+  console.log(state);
   var storedState = req.cookies ? req.cookies[stateKey] : null;
 
   if (state === null || state !== storedState) {
+    console.log("error state mismatch");
     res.redirect('/#' +
       querystring.stringify({
         error: 'state_mismatch'
       }));
   } else {
+    console.log("state passed")
     res.clearCookie(stateKey);
     var authOptions = {
       url: 'https://accounts.spotify.com/api/token',
@@ -95,6 +98,7 @@ app.get('/callback', function(req, res) {
     };
 
     request.post(authOptions, function(error, response, body) {
+      console.log("post authOptions");
       if (!error && response.statusCode === 200) {
 
         var access_token = body.access_token,
@@ -112,12 +116,14 @@ app.get('/callback', function(req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
+        console.log('gonna redirect correctly');
         res.redirect('/#' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           }));
       } else {
+        console.log("not gonna redirect correctly");
         res.redirect('/#' +
           querystring.stringify({
             error: 'invalid_token'
