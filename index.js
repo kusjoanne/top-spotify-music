@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
  })
 
 }
-
+console.log(redirect_uri);
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
