@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/login', function(req, res) {
-
+  console.log("AAAAAAAAAAAAAAAAAAAA LOGIN WAS CALLED");
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
@@ -65,8 +65,7 @@ app.get('/login', function(req, res) {
     }));
 });
 
-app.get('https://my-top-spotify-music.herokuapp.com/callback', function(req, res) {
-
+app.get('/callback', function(req, res) {
   // your application requests refresh and access tokens
   // after checking the state parameter
 
