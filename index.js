@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
-var redirect_uri = 'http://my-top-spotify-music.herokuapp.com/api/callback'; // Your redirect uri
+var redirect_uri = 'https://my-top-spotify-music.herokuapp.com/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -65,14 +65,14 @@ app.get('/login', function(req, res) {
     }));
 });
 
-app.get('/spotify/callback', function(req, res) {
+app.get('/callback', function(req, res) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter
 
   var code = req.query.code || null;
   var state = req.query.state || null;
-  console.log(code);
+
   var storedState = req.cookies ? req.cookies[stateKey] : null;
 
   if (state === null || state !== storedState) {
