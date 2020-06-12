@@ -94,7 +94,7 @@ function App() {
 
   return <div className='App'>
     <h1 style={{fontSize: '4.5rem'}}>MY TOP SPOTFIY MUSIC</h1>
-    { !loggedIn && <div className="login"><Button variant="light" size="lg" href='https://my-top-spotify-music.herokuapp.com/login'> LOG INTO SPOTIFY </Button></div>}
+    { !loggedIn && <div className="login"><Button variant="light" size="lg" href='/login'> LOG INTO SPOTIFY </Button></div>}
     { loggedIn && <QuerySelector getReults={getReults}/>}
     <Container className='results'>
       <CardDeck>
