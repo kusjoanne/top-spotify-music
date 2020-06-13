@@ -38,6 +38,9 @@ function App() {
   function playAudio(audiolink){
     //if the song clicked is the same as the song that was playing
     if(audiolink == songlink){
+      console.log(audiolink);
+      console.log(songlink);
+
       audio = new Audio(audiolink);
       //if the song is not playing play
       if(audio.pause){
@@ -47,6 +50,7 @@ function App() {
       }
     //if the song clicked is different than the one that was previously clicked
     } else {
+      audio.pause();
       songlink = audiolink;
       audio = new Audio(audiolink);
       audio.play();
