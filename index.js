@@ -39,16 +39,8 @@ app.use(express.static(__dirname + '/public'))
    .use(bodyParser.json());
 
 
-//likely that this is fucking up the environment
-//always re-sending the same file
 if (process.env.NODE_ENV === 'production') {
  app.use(express.static('client/build'));
-
- // const path = require('path');
- // app.get('/', (req,res) => {
- //     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
- // })
-
 }
 
 app.get('/login', function(req, res) {
@@ -77,18 +69,12 @@ app.get('/callback', function(req, res) {
   var state = req.query.state || null;
 
   var storedState = req.cookies ? req.cookies[stateKey] : null;
-  console.log("state");
-  console.log(state);
-  console.log("storedState");
-  console.log(storedState);
   if (state === null || state !== storedState) {
-  console.log("state mismatch");
     res.redirect('/#' +
       querystring.stringify({
         error: 'state_mismatch'
       }));
   } else {
-    console.log("state match");
     res.clearCookie(stateKey);
     var authOptions = {
       url: 'https://accounts.spotify.com/api/token',

@@ -16,6 +16,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [results, setResults] = useState([]);
   let audio = null;
+  let songlink = null;
 
   useEffect(()=>{
     if(Object.keys(token).length > 0){
@@ -35,11 +36,26 @@ function App() {
   }
 
   function playAudio(audiolink){
-    if(audio){
-      audio.pause();
+    //if the song clicked is the same as the song that was playing
+    if(audiolink == songlink){
+      audio = new Audio(audiolink);
+      //if the song is not playing play
+      if(audio.pause){
+        audio.play();
+      } else{
+        audio.pause();
+      }
+    //if the song clicked is different than the one that was previously clicked
+    } else {
+      songlink = audiolink;
+      audio = new Audio(audiolink);
+      audio.play();
     }
-    audio = new Audio(audiolink);
-    audio.play();
+    // if(audio){
+    //   audio.pause();
+    // }
+    // audio = new Audio(audiolink);
+    // audio.play();
   }
 
   function getReults(timeRange,resultCount,queryType){
