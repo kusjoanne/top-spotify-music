@@ -1,6 +1,6 @@
 import React from 'react';
 import Artist from './Artist';
-import Grid from 'react-bootstrap/Grid';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 function Results(props){
@@ -13,13 +13,13 @@ function Results(props){
 //   </div>
 // </div>
 
-  return <Grid>
+  return <Container>
     <Row className="show-grid">
       {props.results.map( (result, index) => {
         return <Artist key={index} result={result} />;
       })}
     </Row>
-  </Grid>
+  </Container>
 }
 
 export default Results;
