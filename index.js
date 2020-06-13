@@ -44,8 +44,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/login', function(req, res) {
-  console.log("LOGIN WAS CALLED");
-  console.log(client_id)
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
