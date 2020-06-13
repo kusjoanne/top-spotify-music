@@ -34,7 +34,7 @@ function Artist(props){
             <img class="card-img-top img-fluid" src="//placehold.it/500x200" alt="Card image cap"></img>
             <div class="card-body">
                 <h4 class="card-title">Card title</h4>
-                <p class="card-text">This is a longer card with supporting text below as a natural.</p>
+                <p>This is a longer card with supporting text below as a natural.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
