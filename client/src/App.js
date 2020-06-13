@@ -41,16 +41,20 @@ function App() {
       console.log(audio);
       // audio = new Audio(audiolink);
       //if the song is not playing play
-      if(audio.pause){
-        audio.play();
-        console.log("audio pause");
-      } else if (audio.paused){
+      // if(audio.pause){
+      //   audio.play();
+      //   console.log("audio pause");
+      // } else
+
+       if (audio.paused){
         audio.play();
         console.log("audio paused");
       }
       else{
         audio.pause();
       }
+
+      console.log(audio.paused);
     //if the song clicked is different than the one that was previously clicked
   } else {
       if(audio){
