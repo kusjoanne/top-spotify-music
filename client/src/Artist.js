@@ -23,10 +23,11 @@ function Artist(props){
   //         </div>
   //     </div>
   // </div>
+  //onClick={props.playAudio.bind(this,props.result.previewUrl)}
   return <StyleRoot>
     <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
       <Card style={{ width: '12rem' }}>
-        <div className="cardImg" onClick={props.playAudio.bind(this,props.result.previewUrl)}>
+        <div className="cardImg">
           <Card.Img className='albumArt' variant="top" src={props.result.albumArt} />
           <div className="middle">
             <img className="playbtn" alt="playButton" src="https://image.flaticon.com/icons/png/512/907/907754.png"></img>
