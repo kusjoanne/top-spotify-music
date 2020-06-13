@@ -49,8 +49,10 @@ function App() {
         audio.pause();
       }
     //if the song clicked is different than the one that was previously clicked
-    } else {
-      audio.pause();
+  } else {
+      if(audio){
+        audio.pause();
+      }
       songlink = audiolink;
       audio = new Audio(audiolink);
       audio.play();
