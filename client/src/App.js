@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Artist from './Artist';
 import QuerySelector from './QuerySelector';
+import Results from './Results';
 import Footer from './Footer';
 import Container from 'react-bootstrap/Container';
 import CardDeck from 'react-bootstrap/CardDeck';
@@ -38,23 +38,12 @@ function App() {
   function playAudio(audiolink){
     //if the song clicked is the same as the song that was playing
     if(audiolink == songlink){
-      console.log(audio);
-      // audio = new Audio(audiolink);
-      //if the song is not playing play
-      // if(audio.pause){
-      //   audio.play();
-      //   console.log("audio pause");
-      // } else
-
        if (audio.paused){
         audio.play();
-        console.log("audio paused");
-      }
-      else{
+      } else{
         audio.pause();
       }
 
-      console.log(audio.paused);
     //if the song clicked is different than the one that was previously clicked
   } else {
       if(audio){
@@ -64,11 +53,6 @@ function App() {
       audio = new Audio(audiolink);
       audio.play();
     }
-    // if(audio){
-    //   audio.pause();
-    // }
-    // audio = new Audio(audiolink);
-    // audio.play();
   }
 
   function getReults(timeRange,resultCount,queryType){
@@ -121,17 +105,19 @@ function App() {
 
   }
 
+  //http://localhost:3000/#access_token=BQCmJTlMK6JHBlkLe6EvzAMAiUKA-DW2BGeCW1qFv0zx-eyoQ2H0wol7RpN05ZZi_wu4WznzopPtZEpT1eH_EhuycTPo-BrI-7N7rGZwiZAvLY_N4r33FSxY2t32O-fKevC_6jdwTdGtGh7bAnRv0Of95rNxbTnN4tAzSOB2UA&refresh_token=AQC78V9LA3qZkDQLWUNdu0MPt8QghHl3xUmfD_1yHOg9dePQYvJeEuNeu1gWyFzniTU3vSvSptArfFjI1qnM5em_aYsmaOes9XFInaSYPzUkeboUp0gD_8N2VP0euu7REng
+  // <Container className='results'>
+  //   <CardDeck>
+  //     {results.map( (result, index) => {
+  //       return <Artist key={index} result={result} playAudio={playAudio}/>;
+  //     })}
+  //   </CardDeck>
+  // </Container>
   return <div className='App'>
     <h1 style={{fontSize: '4.5rem'}}>MY TOP SPOTFIY MUSIC</h1>
     { !loggedIn && <div className="login"><Button variant="light" size="lg" href='/login'> LOG INTO SPOTIFY </Button></div>}
     { loggedIn && <QuerySelector getReults={getReults}/>}
-    <Container className='results'>
-      <CardDeck>
-        {results.map( (result, index) => {
-          return <Artist key={index} result={result} playAudio={playAudio}/>;
-        })}
-      </CardDeck>
-    </Container>
+    <Results results={results}/>
     <Footer/>
   </div>
 
