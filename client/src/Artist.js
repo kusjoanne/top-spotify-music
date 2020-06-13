@@ -30,18 +30,12 @@ function Artist(props){
   //onClick={props.playAudio.bind(this,props.result.previewUrl)}
   return <StyleRoot>
     <div class="col-sm-6 col-lg-3 py-2">
-    <Card className="h-100">
-      <div className="cardImg">
-        <Card.Img className='albumArt' variant="top" src={props.result.albumArt} />
-        <div className="middle">
-          <img className="playbtn" alt="playButton" src="https://image.flaticon.com/icons/png/512/907/907754.png"></img>
+        <div class="card h-100">
+            <img class="card-img-top img-fluid" src="//placehold.it/500x200" alt="Card image cap"></img>
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+            </div>
         </div>
-      </div>
-      <Card.Body>
-        <Card.Title style={styles.flipInX}>{props.result.artistName}</Card.Title>
-        {props.result.hasOwnProperty('trackName')&& <Card.Subtitle className="mb-2 text-muted cardTitle">{props.result.trackName}</Card.Subtitle>}
-      </Card.Body>
-    </Card>
     </div>
   </StyleRoot>
 }
