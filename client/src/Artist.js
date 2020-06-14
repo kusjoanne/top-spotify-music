@@ -30,7 +30,7 @@ function Artist(props){
 
   //onClick={props.playAudio.bind(this,props.result.previewUrl)}
   return <StyleRoot>
-  <Col md={4}>
+  <Col md={4} style={styles.flipInX}>
     <Card style={{ width: '12rem' }}>
       <div className="cardImg">
         <Card.Img className='albumArt' variant="top" src={props.result.albumArt} />
