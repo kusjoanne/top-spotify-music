@@ -13,8 +13,6 @@ function App() {
   const [token, setToken] = useState(getHashParams());
   const [loggedIn, setLoggedIn] = useState(false);
   const [results, setResults] = useState([]);
-  let audio = null;
-  let songlink = null;
 
   useEffect(()=>{
     if(Object.keys(token).length > 0){
@@ -31,26 +29,6 @@ function App() {
        hashParams[e[1]] = decodeURIComponent(e[2]);
     }
     return (hashParams);
-  }
-
-  function playAudio(audiolink){
-    //if the song clicked is the same as the song that was playing
-    if(audiolink == songlink){
-       if (audio.paused){
-        audio.play();
-      } else{
-        audio.pause();
-      }
-
-    //if the song clicked is different than the one that was previously clicked
-  } else {
-      if(audio){
-        audio.pause();
-      }
-      songlink = audiolink;
-      audio = new Audio(audiolink);
-      audio.play();
-    }
   }
 
   function getReults(timeRange,resultCount,queryType){
@@ -107,7 +85,7 @@ function App() {
     <h1 style={{fontSize: '4.5rem'}}>MY TOP SPOTFIY MUSIC</h1>
     { !loggedIn && <div className="login"><Button variant="light" size="lg" href='/login'> LOG INTO SPOTIFY </Button></div>}
     { loggedIn && <QuerySelector getReults={getReults}/>}
-    <Results results={results} playAudio={playAudio}/>
+    <Results results={results}/>
     <Footer/>
   </div>
 
