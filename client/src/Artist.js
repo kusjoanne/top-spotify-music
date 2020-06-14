@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { flipInX } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
+import Col from 'react-bootstrap/Col';
 
 function Artist(props){
 
@@ -12,11 +13,14 @@ function Artist(props){
       width: '12rem',
     }
   }
-  // this goes in Card.Img className='albumArt 
+  // this goes in Card.Img className='albumArt
   //onClick={props.playAudio.bind(this,props.result.previewUrl)}
 
+  //this goes after StyleRoot
+  // <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
+
   return <StyleRoot>
-    <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
+    <Col md={4}>
       <Card style={{ width: '12rem' }}>
         <div className="cardImg">
           <Card.Img className='albumArt' variant="top" src={props.result.albumArt} />
@@ -29,7 +33,7 @@ function Artist(props){
           {props.result.hasOwnProperty('trackName')&& <Card.Subtitle className="mb-2 text-muted cardTitle">{props.result.trackName}</Card.Subtitle>}
         </Card.Body>
       </Card>
-    </div>
+    </Col>
   </StyleRoot>
 }
 
