@@ -15,9 +15,9 @@ function Results(props){
 
   return <Container>
     <Row className="show-grid">
-      {props.results.map( (result, index) => {
-        return <Artist key={index} result={result} />;
-      })}
+    {props.results.map( (result, index) => {
+       return <Artist key={index} result={result} />;
+     })}
     </Row>
   </Container>
 }
