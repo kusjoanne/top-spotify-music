@@ -20,8 +20,8 @@ function Artist(props){
   // <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
 
   return <StyleRoot>
-    <Col md={4}
-      <Card style={{ width: '12rem' }}>
+    <Col md={4}>
+      <Card style={styles.flipInX}>
         <div className="cardImg">
           <Card.Img className='albumArt' variant="top" src={props.result.albumArt} />
           <div className="middle">
