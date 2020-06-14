@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import QuerySelector from './QuerySelector';
 import Results from './Results';
 import Footer from './Footer';
-import Container from 'react-bootstrap/Container';
-import CardDeck from 'react-bootstrap/CardDeck';
 import Button from 'react-bootstrap/Button';
 const SpotifyWebApi = require('spotify-web-api-node');
 const axios = require('axios');
@@ -105,19 +103,11 @@ function App() {
 
   }
 
-  //http://localhost:3000/#access_token=BQCmJTlMK6JHBlkLe6EvzAMAiUKA-DW2BGeCW1qFv0zx-eyoQ2H0wol7RpN05ZZi_wu4WznzopPtZEpT1eH_EhuycTPo-BrI-7N7rGZwiZAvLY_N4r33FSxY2t32O-fKevC_6jdwTdGtGh7bAnRv0Of95rNxbTnN4tAzSOB2UA&refresh_token=AQC78V9LA3qZkDQLWUNdu0MPt8QghHl3xUmfD_1yHOg9dePQYvJeEuNeu1gWyFzniTU3vSvSptArfFjI1qnM5em_aYsmaOes9XFInaSYPzUkeboUp0gD_8N2VP0euu7REng
-  // <Container className='results'>
-  //   <CardDeck>
-  //     {results.map( (result, index) => {
-  //       return <Artist key={index} result={result} playAudio={playAudio}/>;
-  //     })}
-  //   </CardDeck>
-  // </Container>
   return <div className='App'>
     <h1 style={{fontSize: '4.5rem'}}>MY TOP SPOTFIY MUSIC</h1>
     { !loggedIn && <div className="login"><Button variant="light" size="lg" href='/login'> LOG INTO SPOTIFY </Button></div>}
     { loggedIn && <QuerySelector getReults={getReults}/>}
-    <Results results={results}/>
+    <Results results={results} playAudio={playAudio}/>
     <Footer/>
   </div>
 
