@@ -20,8 +20,8 @@ function Artist(props){
   // <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
 
   return <StyleRoot>
-    <Col md={4} style={styles.flipInX}>
-      <Card>
+    <Col md={4}>
+      <Card style={{ width: '12rem' }}>
         <div className="cardImg">
           <Card.Img className='albumArt' variant="top" src={props.result.albumArt} onClick={props.playAudio.bind(this,props.result.previewUrl)}/>
           <div className="middle">
@@ -29,7 +29,7 @@ function Artist(props){
           </div>
         </div>
         <Card.Body>
-          <Card.Title>{props.result.artistName}</Card.Title>
+          <Card.Title style={styles.flipInX}>{props.result.artistName}</Card.Title>
           {props.result.hasOwnProperty('trackName')&& <Card.Subtitle className="mb-2 text-muted cardTitle">{props.result.trackName}</Card.Subtitle>}
         </Card.Body>
       </Card>
