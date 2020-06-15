@@ -50,13 +50,13 @@ div.cardImg:hover .middle {
 div.card-body{
   padding: 5px;
   text-align: center;
-  font-size: 25.5vw;
+  /* font-size: 25.5vw; */
   font-family: 'Questrial', sans-serif;
 }
 
 div.card-title{
   margin-bottom:0;
-  font-size: 2vh;
+  font-size: 1vw;
   font-weight: bold;
   padding-bottom: 5px;
 }
@@ -130,10 +130,6 @@ a.dropdown-item{
 }
 
 .footer{
-  /* position:fixed;
-  bottom:20px;
-  left:45%;
-  padding-top: 90%; */
   margin-top: 50px;
   margin-bottom: 30px;
   text-align: center;
@@ -143,13 +139,4 @@ a.dropdown-item{
 .socialMediaIcon{
   width: 25px;
   margin-left: 10px;
-}
-
-@media (max-width: 480px){
-  div.card-title{
-    margin-bottom:0;
-    font-size: 1vh;
-    font-weight: bold;
-    padding-bottom: 5px;
-  }
 }

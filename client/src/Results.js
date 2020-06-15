@@ -22,6 +22,7 @@ function Results(props){
       }
       setSongLink(audiolink);
       audio = new Audio(audiolink);
+      audio.volume = 0.5;
       audio.play();
       props.setAudio(audio);
     }

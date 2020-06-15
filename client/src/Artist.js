@@ -14,12 +14,9 @@ function Artist(props){
     }
   }
 
-  //this goes after StyleRoot
-  // <div className="deviceCard col-3 mb-3" style={styles.flipInX}>
-
   return <StyleRoot>
     <Col md={4}>
-      <div class="card" style={styles.flipInX}>
+      <div className="card" style={styles.flipInX}>
         <div className="cardImg" onClick={props.playAudio.bind(this,props.result.previewUrl)}>
           <Card.Img className='albumArt' variant="top" src={props.result.albumArt}/>
           <div className="middle">
