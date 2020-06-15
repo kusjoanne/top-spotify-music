@@ -30,7 +30,7 @@ function Results(props){
   return <Container>
     <Row className="show-grid">
       {props.results.map( (result, index) => {
-        return <Artist key={index} result={result} playAudio={props.playAudio}/>;
+        return <Artist key={index} result={result} playAudio={playAudio}/>;
       })}
     </Row>
   </Container>
