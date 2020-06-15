@@ -1,16 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Artist from './Artist';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 function Results(props){
-  let songlink = null;
+  const [songlink, setSongLink] = useState(null);
   let audio = props.audio;
 
   function playAudio(audiolink){
-    console.log(audiolink);
     //if the song clicked is the same as the song that was playing
-    if(audiolink == songlink){
+    if(audiolink === songlink){
        if (audio.paused){
         audio.play();
       } else{
@@ -21,16 +20,17 @@ function Results(props){
       if(audio){
         audio.pause();
       }
-      songlink = audiolink;
+      setSongLink(audiolink);
       audio = new Audio(audiolink);
       audio.play();
+      props.setAudio(audio);
     }
   }
 
   return <Container>
     <Row className="show-grid">
       {props.results.map( (result, index) => {
-        return <Artist key={index} result={result} playAudio={playAudio}/>;
+        return <Artist key={index} result={result} playAudio={playAudio} playing={audio}/>;
       })}
     </Row>
   </Container>

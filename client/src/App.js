@@ -13,7 +13,7 @@ function App() {
   const [token, setToken] = useState(getHashParams());
   const [loggedIn, setLoggedIn] = useState(false);
   const [results, setResults] = useState([]);
-  let audio = null;
+  const [audio, setAudio] = useState(null);
 
   useEffect(()=>{
     if(Object.keys(token).length > 0){
@@ -31,8 +31,6 @@ function App() {
     }
     return (hashParams);
   }
-
-
 
   function getReults(timeRange,resultCount,queryType){
     queryType = queryType.toLowerCase();
@@ -81,14 +79,13 @@ function App() {
     }).catch(err => {
       console.log(err);
     })
-
   }
 
   return <div className='App'>
     <h1 style={{fontSize: '4.5rem'}}>MY TOP SPOTFIY MUSIC</h1>
     { !loggedIn && <div className="login"><Button variant="light" size="lg" href='/login'> LOG INTO SPOTIFY </Button></div>}
     { loggedIn && <QuerySelector getReults={getReults}/>}
-    <Results results={results} audio={audio}/>
+    <Results results={results} audio={audio} setAudio={setAudio}/>
     <Footer/>
   </div>
 
