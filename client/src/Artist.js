@@ -10,6 +10,7 @@ function Artist(props){
       animation: '1s',
       animationName: Radium.keyframes(flipInX, 'flipInX'),
       width: '12rem',
+      fontSize: ''
     }
   }
 
