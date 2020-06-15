@@ -8,6 +8,7 @@ function Results(props){
   let audio = props.audio;
 
   function playAudio(audiolink){
+    console.log(audiolink);
     //if the song clicked is the same as the song that was playing
     if(audiolink == songlink){
        if (audio.paused){
@@ -25,7 +26,6 @@ function Results(props){
       audio.play();
     }
   }
-
 
   return <Container>
     <Row className="show-grid">

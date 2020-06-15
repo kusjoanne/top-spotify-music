@@ -23,7 +23,7 @@ function Artist(props){
     <Col md={4}>
       <Card style={{ width: '12rem' }}>
         <div className="cardImg">
-          <Card.Img className='albumArt' variant="top" src={props.result.albumArt} onClick={props.playAudio.bind(this,props.result.previewUrl)}/>
+          <Card.Img className='albumArt' variant="top" src={props.result.albumArt} onClick={() => this.props.playAudio(props.result.previewUrl)}/>
           <div className="middle">
             <img className="playbtn" alt="playButton" src="https://image.flaticon.com/icons/png/512/907/907754.png"></img>
           </div>
